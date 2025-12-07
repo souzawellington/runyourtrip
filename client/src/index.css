@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   RUN YOUR TRIP - PHOENIX Design System
+   ============================================
+   Color Palette:
+   - Primary (Orange): #FF7A2E
+   - Background (Dark): #28282D
+   - Card (Medium Gray): #3A3A40
+   - Text (Light): #EFEFEF
+   - Muted Text: #9E9E9E
+   ============================================ */
+
+/* Custom shadow for navbar menu */
+@layer components {
+  .shadow-input {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+  
+  /* PHOENIX Glow Effect */
+  .glow-orange {
+    box-shadow: 0 0 20px rgba(255, 122, 46, 0.4),
+                0 0 40px rgba(255, 122, 46, 0.2),
+                0 0 60px rgba(255, 122, 46, 0.1);
+  }
+  
+  .glow-orange-sm {
+    box-shadow: 0 0 10px rgba(255, 122, 46, 0.3),
+                0 0 20px rgba(255, 122, 46, 0.15);
+  }
+  
+  /* PHOENIX Card Style */
+  .phoenix-card {
+    @apply bg-[#3A3A40] rounded-xl border border-[#4A4A50] p-6;
+    transition: all 0.3s ease;
+  }
+  
+  .phoenix-card:hover {
+    @apply border-orange-500/50;
+    box-shadow: 0 0 30px rgba(255, 122, 46, 0.15);
+  }
+  
+  /* PHOENIX Button */
+  .phoenix-btn {
+    @apply bg-[#FF7A2E] text-white font-semibold px-6 py-3 rounded-lg;
+    @apply hover:bg-[#FF8F4D] transition-all duration-300;
+    @apply focus:outline-none focus:ring-2 focus:ring-orange-500/50;
+  }
+  
+  .phoenix-btn:hover {
+    box-shadow: 0 0 20px rgba(255, 122, 46, 0.5);
+    transform: translateY(-1px);
+  }
+  
+  /* PHOENIX Input */
+  .phoenix-input {
+    @apply bg-[#28282D] border border-[#4A4A50] text-[#EFEFEF] rounded-lg;
+    @apply px-4 py-3 focus:outline-none focus:border-orange-500;
+    @apply placeholder:text-[#9E9E9E];
+  }
+  
+  /* Stats Card */
+  .stats-card {
+    @apply phoenix-card flex flex-col items-center justify-center text-center;
+    min-height: 120px;
+  }
+  
+  .stats-value {
+    @apply text-3xl font-bold text-[#FF7A2E];
+  }
+  
+  .stats-label {
+    @apply text-sm text-[#9E9E9E] mt-2;
+  }
+}
+
+:root {
+  /* PHOENIX Light Mode (kept for compatibility) */
+  --background: hsl(0, 0%, 98%);
+  --foreground: hsl(0, 0%, 12%);
+  --muted: hsl(210, 40%, 96%);
+  --muted-foreground: hsl(215, 13%, 44%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(0, 0%, 12%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(0, 0%, 12%);
+  --border: hsl(214, 32%, 91%);
+  --input: hsl(214, 32%, 91%);
+  --primary: 21 100% 57%; /* #FF7A2E */
+  --primary-foreground: 0 0% 100%;
+  --secondary: hsl(273, 78%, 58%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --accent: 21 100% 57%; /* Orange accent */
+  --accent-foreground: hsl(0, 0%, 100%);
+  --success: hsl(142, 76%, 36%);
+  --success-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --ring: 21 100% 57%;
+  --radius: 0.75rem;
+  --bg-light: hsl(0, 0%, 98%);
+  --text-dark: hsl(0, 0%, 12%);
+  
+  /* PHOENIX Custom Properties */
+  --phoenix-orange: #FF7A2E;
+  --phoenix-orange-light: #FF8F4D;
+  --phoenix-orange-dark: #E56A1E;
+  --phoenix-bg-dark: #28282D;
+  --phoenix-card: #3A3A40;
+  --phoenix-card-hover: #4A4A50;
+  --phoenix-text: #EFEFEF;
+  --phoenix-muted: #9E9E9E;
+}
+
+.dark {
+  /* PHOENIX Dark Mode (Primary Mode) */
+  --background: 225 6% 17%; /* #28282D */
+  --foreground: 0 0% 94%; /* #EFEFEF */
+  --muted: 225 4% 25%; /* #3A3A40 */
+  --muted-foreground: 0 0% 62%; /* #9E9E9E */
+  --popover: 225 6% 17%;
+  --popover-foreground: 0 0% 94%;
+  --card: 225 4% 25%;
+  --card-foreground: 0 0% 94%;
+  --border: 225 4% 30%;
+  --input: 225 4% 25%;
+  --primary: 21 100% 57%; /* #FF7A2E */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 225 4% 30%;
+  --secondary-foreground: 0 0% 94%;
+  --accent: 21 100% 57%;
+  --accent-foreground: 0 0% 100%;
+  --success: hsl(142, 76%, 36%);
+  --success-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: 21 100% 57%;
+  --bg-light: 225 6% 17%;
+  --text-dark: 0 0% 94%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  /* Force dark mode for PHOENIX theme */
+  html {
+    color-scheme: dark;
+  }
+}
+
+@layer utilities {
+  /* PHOENIX Gradient (Orange to Red) */
+  .gradient-primary {
+    background: linear-gradient(135deg, #FF7A2E 0%, #FF4D4D 100%);
+  }
+  
+  /* PHOENIX Card Gradient */
+  .gradient-card {
+    background: linear-gradient(135deg, rgba(255, 122, 46, 0.1) 0%, rgba(255, 77, 77, 0.05) 100%);
+  }
+  
+  /* PHOENIX Text Gradient */
+  .text-gradient {
+    background: linear-gradient(135deg, #FF7A2E 0%, #FF6B6B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* PHOENIX Background Gradient */
+  .bg-phoenix {
+    background: linear-gradient(180deg, #28282D 0%, #1E1E22 100%);
+  }
+  
+  /* Subtle animation for glow */
+  .animate-glow {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(255, 122, 46, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(255, 122, 46, 0.6);
+    }
+  }
+  
+  /* Chart container */
+  .chart-container {
+    @apply phoenix-card;
+    height: 300px;
+  }
+  
+  /* Product card hover effect */
+  .product-card {
+    @apply phoenix-card cursor-pointer;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  /* Badge styles */
+  .phoenix-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    @apply bg-[#FF7A2E]/20 text-[#FF7A2E];
+  }
+  
+  .phoenix-badge-success {
+    @apply bg-green-500/20 text-green-400;
+  }
+  
+  .phoenix-badge-warning {
+    @apply bg-yellow-500/20 text-yellow-400;
+  }
+}
+
+/* Custom scrollbar for PHOENIX theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #28282D;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4A4A50;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5A5A60;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(255, 122, 46, 0.3);
+  color: #EFEFEF;
+}

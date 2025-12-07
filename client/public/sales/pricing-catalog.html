@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Run Your Trip — Plans & Digital Catalog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Run Your Trip: premium tools for digital nomads, creators, and travel entrepreneurs. Choose your plan and shop our digital products.">
+  <style>
+    :root{
+      --bg: #0b0f14;
+      --card: #101722;
+      --muted: #9fb0c0;
+      --text: #e8f0f7;
+      --brand: #11b0ff;
+      --brand-2:#7cffb3;
+      --border: #1e2937;
+      --accent: #182230;
+      --danger:#ff5470;
+      --success:#2bc970;
+      --shadow: 0 8px 32px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(17,176,255,.20), transparent 60%),
+                  radial-gradient(800px 400px at 80% -10%, rgba(124,255,179,.15), transparent 60%),
+                  var(--bg);
+      line-height:1.45;
+    }
+    a{color:var(--brand);text-decoration:none}
+    .container{max-width:1150px;margin:0 auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+    .logo{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:.2px}
+    .logo-badge{
+      width:36px;height:36px;border-radius:10px;
+      background: linear-gradient(135deg,var(--brand),var(--brand-2));
+      display:grid;place-items:center;color:#00131e;font-weight:900;box-shadow:var(--shadow)
+    }
+    .nav a{margin-left:18px;color:var(--muted)}
+    .hero{padding:56px 0 24px;display:grid;gap:14px; text-align:center}
+    .title{font-size: clamp(28px, 5vw, 46px); line-height:1.05; font-weight:900; letter-spacing:-.02em}
+    .subtitle{color: var(--muted);max-width:800px;margin:0 auto}
+    .cta-row{display:flex;gap:12px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+    .btn{
+      padding:12px 18px;border-radius:12px;border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      color:var(--text);box-shadow:var(--shadow);cursor:pointer;font-weight:700
+    }
+    .btn.primary{background: linear-gradient(135deg,var(--brand), var(--brand-2)); color:#05131d;border:0}
+    .badges{display:flex;gap:18px;justify-content:center;color:var(--muted);flex-wrap:wrap;margin-top:16px}
+    .shield{display:flex;gap:8px;align-items:center;padding:8px 10px;border-radius:999px;border:1px solid var(--border);background:var(--accent)}
+    section{padding:36px 0}
+    h2{font-size: clamp(22px,3.6vw,34px);margin:0 0 16px}
+    .muted{color:var(--muted)}
+    /* Pricing */
+    .pricing-wrap{display:grid;gap:18px}
+    .toggle{
+      border:1px solid var(--border);border-radius:12px;display:inline-flex;padding:6px;background:var(--accent);gap:6px
+    }
+    .toggle button{
+      background:transparent;border:0;padding:8px 14px;border-radius:10px;color:var(--muted);font-weight:700;cursor:pointer
+    }
+    .toggle button.active{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#05131d}
+    .pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    @media (max-width:980px){.pricing-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width:640px){.pricing-grid{grid-template-columns:1fr}}
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow)
+    }
+    .card.featured{outline:2px solid var(--brand); background:linear-gradient(180deg, rgba(17,176,255,.22), rgba(17,176,255,.06))}
+    .price{display:flex;align-items:flex-end;gap:6px}
+    .price .amount{font-size:42px;font-weight:900;letter-spacing:-.02em}
+    .period{color:var(--muted)}
+    .feature{display:flex;gap:10px;align-items:flex-start;margin:8px 0}
+    .feature svg{flex:0 0 18px}
+    .divider{height:1px;background:linear-gradient(90deg,transparent, var(--border), transparent);margin:12px 0}
+    /* Catalog */
+    .catalog-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+    @media (max-width:1100px){.catalog-grid{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:700px){.catalog-grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:480px){.catalog-grid{grid-template-columns:1fr}}
+    .product{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--border); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; min-height:260px
+    }
+    .thumb{aspect-ratio:16/9;background:
+      linear-gradient(135deg, rgba(17,176,255,.25), rgba(124,255,179,.25)),
+      linear-gradient(180deg, rgba(0,0,0,.25), transparent),
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="%2311b0ff"/><stop offset="1" stop-color="%237cffb3"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23g)" opacity="0.25"/></svg>');
+      background-size:cover; background-position:center
+    }
+    .p-body{padding:14px;display:grid;gap:8px;flex:1}
+    .tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+    .tag b{color:var(--text)}
+    .p-title{font-weight:800;line-height:1.2}
+    .p-desc{color:var(--muted);font-size:14px}
+    .p-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+    .buy{padding:8px 12px;border-radius:10px;border:1px solid var(--border);cursor:pointer;font-weight:800}
+    .buy.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#05131d;border:0}
+    .price-chip{font-weight:800}
+    /* FAQ */
+    .faq{display:grid;gap:10px}
+    details{border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--accent)}
+    summary{cursor:pointer;font-weight:700}
+    footer{color:var(--muted);padding:24px 0;border-top:1px solid var(--border);margin-top:24px}
+    /* Toast */
+    .toast{
+      position:fixed;right:16px;bottom:16px;background:#061018;color:var(--text);
+      border:1px solid var(--border);padding:12px 14px;border-radius:12px;box-shadow:var(--shadow);display:none
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo"><div class="logo-badge">RYT</div> Run Your Trip</div>
+      <nav class="nav">
+        <a href="#pricing">Pricing</a>
+        <a href="#catalog">Catalog</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="title">Build a borderless creator business.<br>Travel smarter. Sell faster.</div>
+      <p class="subtitle">Plans and digital products designed for digital nomads, travel creators, and visionary doers. Everything you need to plan trips, create content, and monetize—without friction.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#pricing">Choose your plan</a>
+        <a class="btn" href="#catalog">Shop the catalog</a>
+      </div>
+      <div class="badges">
+        <div class="shield">🔒 Secure checkout via Stripe</div>
+        <div class="shield">⚡ Instant downloads</div>
+        <div class="shield">💬 Priority support on Pro+</div>
+        <div class="shield">♻️ Lifetime updates on select products</div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <h2>Membership pricing</h2>
+      <p class="muted">Monthly vs. Yearly <b>(save 20% on yearly)</b></p>
+      <div class="pricing-wrap">
+        <div class="toggle" role="tablist" aria-label="Billing period">
+          <button id="btn-monthly" class="active" aria-selected="true">Monthly</button>
+          <button id="btn-yearly" aria-selected="false">Yearly</button>
+        </div>
+
+        <div class="pricing-grid" aria-live="polite">
+          <!-- Starter -->
+          <div class="card">
+            <div class="tag">Starter • <b>Solo</b></div>
+            <h3>Starter</h3>
+            <div class="price">
+              <span class="amount" data-amount data-month="39" data-year="375">R$39</span>
+              <span class="period">/ <span data-period>mo</span></span>
+            </div>
+            <div class="divider"></div>
+            <div>
+              <div class="feature">✅ 3 downloads / month</div>
+              <div class="feature">✅ Creator community access</div>
+              <div class="feature">✅ Weekly nomad newsletter</div>
+            </div>
+            <div class="divider"></div>
+            <button id="starterBtn" class="btn primary" data-plan="starter" data-checkout="">Get Starter</button>
+            <p class="muted" style="margin-top:8px">Great to test the ecosystem.</p>
+          </div>
+
+          <!-- Pro (featured) -->
+          <div class="card featured">
+            <div class="tag">Pro • <b>Creators</b></div>
+            <h3>Pro</h3>
+            <div class="price">
+              <span class="amount" data-amount data-month="99" data-year="950">R$99</span>
+              <span class="period">/ <span data-period>mo</span></span>
+            </div>
+            <div class="divider"></div>
+            <div>
+              <div class="feature">✅ Everything in Starter</div>
+              <div class="feature">✅ 10 downloads / month</div>
+              <div class="feature">✅ AI content tools (workflows, prompts)</div>
+              <div class="feature">✅ Priority support</div>
+            </div>
+            <div class="divider"></div>
+            <button id="proBtn" class="btn primary" data-plan="pro" data-checkout="">Go Pro</button>
+            <p class="muted" style="margin-top:8px">Best value for most creators.</p>
+          </div>
+
+          <!-- Business -->
+          <div class="card">
+            <div class="tag">Business • <b>Teams</b></div>
+            <h3>Business</h3>
+            <div class="price">
+              <span class="amount" data-amount data-month="249" data-year="2380">R$249</span>
+              <span class="period">/ <span data-period>mo</span></span>
+            </div>
+            <div class="divider"></div>
+            <div>
+              <div class="feature">✅ Unlimited downloads (fair use)</div>
+              <div class="feature">✅ 3 seats included</div>
+              <div class="feature">✅ API & integrations (Zapier/n8n)</div>
+              <div class="feature">✅ Quarterly 1:1 strategy call</div>
+            </div>
+            <div class="divider"></div>
+            <button id="bizBtn" class="btn primary" data-plan="business" data-checkout="">Start Business</button>
+            <p class="muted" style="margin-top:8px">For agencies & growing teams.</p>
+          </div>
+
+          <!-- Enterprise -->
+          <div class="card">
+            <div class="tag">Enterprise • <b>Scale</b></div>
+            <h3>Enterprise</h3>
+            <div class="price">
+              <span class="amount" data-amount data-month="0" data-year="0">Custom</span>
+              <span class="period">&nbsp;</span>
+            </div>
+            <div class="divider"></div>
+            <div>
+              <div class="feature">✅ SSO, SLAs & white-label</div>
+              <div class="feature">✅ Dedicated success manager</div>
+              <div class="feature">✅ Seats & usage to fit your org</div>
+              <div class="feature">✅ Custom pricing & flex contracts</div>
+            </div>
+            <div class="divider"></div>
+            <button class="btn" onclick="window.location.href='mailto:enterprise@runyourtrip.com.br'">Contact Sales</button>
+            <p class="muted" style="margin-top:8px">Let's talk your needs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalog">
+      <h2>Digital catalog</h2>
+      <p class="muted">Specialized guides, templates, and workflows for location-independent entrepreneurs.</p>
+      <div class="catalog-grid">
+        <!-- Product 1 -->
+        <div class="product">
+          <div class="thumb"></div>
+          <div class="p-body">
+            <div class="tag">Guide • <b>Travel</b></div>
+            <div class="p-title">Nomad Tax Optimization Playbook</div>
+            <div class="p-desc">Legal frameworks for minimizing taxes as a digital nomad. 180+ pages.</div>
+            <div class="p-foot">
+              <span class="price-chip">R$497</span>
+              <button class="buy primary" data-product="p1">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product">
+          <div class="thumb"></div>
+          <div class="p-body">
+            <div class="tag">Template • <b>Business</b></div>
+            <div class="p-title">Creator Income Dashboard</div>
+            <div class="p-desc">Track multiple revenue streams in one place. Notion + Google Sheets.</div>
+            <div class="p-foot">
+              <span class="price-chip">R$197</span>
+              <button class="buy primary" data-product="p2">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product">
+          <div class="thumb"></div>
+          <div class="p-body">
+            <div class="tag">Course • <b>Content</b></div>
+            <div class="p-title">30-Day Travel Content Calendar</div>
+            <div class="p-desc">Daily content prompts + templates. Never run out of ideas.</div>
+            <div class="p-foot">
+              <span class="price-chip">R$297</span>
+              <button class="buy primary" data-product="p3">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product">
+          <div class="thumb"></div>
+          <div class="p-body">
+            <div class="tag">Tool • <b>Productivity</b></div>
+            <div class="p-title">AI Travel Assistant Prompts</div>
+            <div class="p-desc">200+ optimized ChatGPT/Claude prompts for travel planning & content.</div>
+            <div class="p-foot">
+              <span class="price-chip">R$147</span>
+              <button class="buy primary" data-product="p4">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product">
+          <div class="thumb"></div>
+          <div class="p-body">
+            <div class="tag">Guide • <b>Finance</b></div>
+            <div class="p-title">Remote Work Visa Masterclass</div>
+            <div class="p-desc">Complete visa guides for 50+ countries. Updated quarterly.</div>
+            <div class="p-foot">
+              <span class="price-chip">R$397</span>
+              <button class="buy primary" data-product="p5">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product">
+          <div class="thumb"></div>
+          <div class="p-body">
+            <div class="tag">Workflow • <b>AI</b></div>
+            <div class="p-title">Content Repurposing System</div>
+            <div class="p-desc">Turn 1 piece of content into 20+. Automated workflows included.</div>
+            <div class="p-foot">
+              <span class="price-chip">R$347</span>
+              <button class="buy primary" data-product="p6">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="product">
+          <div class="thumb"></div>
+          <div class="p-body">
+            <div class="tag">Template • <b>Legal</b></div>
+            <div class="p-title">Service Agreement Templates</div>
+            <div class="p-desc">Professional contracts for freelancers. 15+ templates.</div>
+            <div class="p-foot">
+              <span class="price-chip">R$247</span>
+              <button class="buy primary" data-product="p7">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 8 -->
+        <div class="product">
+          <div class="thumb"></div>
+          <div class="p-body">
+            <div class="tag">Course • <b>Growth</b></div>
+            <div class="p-title">Instagram Travel Growth Hacks</div>
+            <div class="p-desc">0 to 10K followers in 90 days. Proven strategies.</div>
+            <div class="p-foot">
+              <span class="price-chip">R$597</span>
+              <button class="buy primary" data-product="p8">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 9 -->
+        <div class="product">
+          <div class="thumb"></div>
+          <div class="p-body">
+            <div class="tag">Tool • <b>Planning</b></div>
+            <div class="p-title">Trip Budget Calculator Pro</div>
+            <div class="p-desc">Advanced spreadsheet with 100+ destinations pre-loaded.</div>
+            <div class="p-foot">
+              <span class="price-chip">R$97</span>
+              <button class="buy primary" data-product="p9">Buy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 10 -->
+        <div class="product">
+          <div class="thumb"></div>
+          <div class="p-body">
+            <div class="tag">Bundle • <b>Ultimate</b></div>
+            <div class="p-title">Creator Success Bundle</div>
+            <div class="p-desc">Everything you need: 5 courses + 10 templates + community.</div>
+            <div class="p-foot">
+              <span class="price-chip">R$1997</span>
+              <button class="buy primary" data-product="p10">Buy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>FAQ</h2>
+      <div class="faq">
+        <details>
+          <summary>Can I cancel anytime?</summary>
+          <p>Yes! Cancel your subscription anytime from your account dashboard. No questions asked.</p>
+        </details>
+        <details>
+          <summary>Do I get instant access?</summary>
+          <p>Yes, immediately after payment you'll receive login credentials and can start downloading.</p>
+        </details>
+        <details>
+          <summary>Are there refunds?</summary>
+          <p>We offer a 14-day money-back guarantee on all products. Simply email support@runyourtrip.com.br.</p>
+        </details>
+        <details>
+          <summary>Can I upgrade my plan?</summary>
+          <p>Absolutely! Upgrade anytime and we'll prorate the difference. Downgrades take effect at the next billing cycle.</p>
+        </details>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Run Your Trip. All rights reserved. | <a href="/terms">Terms</a> | <a href="/privacy">Privacy</a></p>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast">✓ Redirecting to checkout...</div>
+
+  <script>
+    // Billing toggle
+    const btnMonthly = document.getElementById('btn-monthly');
+    const btnYearly = document.getElementById('btn-yearly');
+    const amounts = document.querySelectorAll('[data-amount]');
+    const periods = document.querySelectorAll('[data-period]');
+    
+    let currentPeriod = 'monthly';
+
+    btnMonthly.addEventListener('click', () => {
+      currentPeriod = 'monthly';
+      btnMonthly.classList.add('active');
+      btnYearly.classList.remove('active');
+      updatePricing();
+    });
+
+    btnYearly.addEventListener('click', () => {
+      currentPeriod = 'yearly';
+      btnYearly.classList.add('active');
+      btnMonthly.classList.remove('active');
+      updatePricing();
+    });
+
+    function updatePricing() {
+      amounts.forEach(el => {
+        const month = el.dataset.month;
+        const year = el.dataset.year;
+        if (currentPeriod === 'monthly') {
+          el.textContent = month === '0' ? 'Custom' : `R$${month}`;
+        } else {
+          el.textContent = year === '0' ? 'Custom' : `R$${year}`;
+        }
+      });
+      periods.forEach(el => {
+        el.textContent = currentPeriod === 'monthly' ? 'mo' : 'yr';
+      });
+      updateCheckoutLinks();
+    }
+
+    // Fetch checkout links from API
+    let checkoutLinks = {};
+    
+    async function fetchCheckoutLinks() {
+      try {
+        const response = await fetch('/api/sales/checkout-links');
+        if (response.ok) {
+          checkoutLinks = await response.json();
+          updateCheckoutLinks();
+        }
+      } catch (error) {
+        console.error('Failed to fetch checkout links:', error);
+      }
+    }
+
+    function updateCheckoutLinks() {
+      // Update membership plan buttons
+      const starterBtn = document.getElementById('starterBtn');
+      const proBtn = document.getElementById('proBtn');
+      const bizBtn = document.getElementById('bizBtn');
+
+      if (checkoutLinks.membership) {
+        const suffix = currentPeriod === 'monthly' ? '_monthly' : '_yearly';
+        
+        if (starterBtn && checkoutLinks.membership[`starter${suffix}`]) {
+          starterBtn.onclick = () => redirect(checkoutLinks.membership[`starter${suffix}`]);
+        }
+        if (proBtn && checkoutLinks.membership[`pro${suffix}`]) {
+          proBtn.onclick = () => redirect(checkoutLinks.membership[`pro${suffix}`]);
+        }
+        if (bizBtn && checkoutLinks.membership[`business${suffix}`]) {
+          bizBtn.onclick = () => redirect(checkoutLinks.membership[`business${suffix}`]);
+        }
+      }
+
+      // Update catalog product buttons
+      document.querySelectorAll('[data-product]').forEach(btn => {
+        const productId = btn.dataset.product;
+        if (checkoutLinks.catalog && checkoutLinks.catalog[productId]) {
+          btn.onclick = () => redirect(checkoutLinks.catalog[productId]);
+        }
+      });
+    }
+
+    function redirect(url) {
+      if (!url) {
+        alert('Payment link not configured yet. Please contact support.');
+        return;
+      }
+      const toast = document.getElementById('toast');
+      toast.style.display = 'block';
+      setTimeout(() => {
+        window.location.href = url;
+      }, 1000);
+    }
+
+    // Initialize
+    fetchCheckoutLinks();
+  </script>
+</body>
+</html>
