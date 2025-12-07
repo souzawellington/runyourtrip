@@ -8,9 +8,9 @@ import memoize from "memoizee";
 import connectPg from "connect-pg-simple";
 import { storage } from "./storage";
 
-if (!process.env.REPLIT_DOMAINS) {
-  throw new Error("Environment variable REPLIT_DOMAINS not provided");
-}
+// Check if running on Replit (allows local development without Replit auth)
+const isReplit = !!process.env.REPLIT_DOMAINS;
+
 
 const getOidcConfig = memoize(
   async () => {
@@ -73,6 +73,26 @@ export async function setupAuth(app: Express) {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  // Skip Replit OIDC setup if not running on Replit
+  if (!isReplit) {
+    console.log("⚠️ Running without Replit auth (local development mode)");
+
+    // Setup basic passport serialize/deserialize for session support
+    passport.serializeUser((user: Express.User, cb) => cb(null, user));
+    passport.deserializeUser((user: Express.User, cb) => cb(null, user));
+
+    // Provide mock login for local dev
+    app.get("/api/login", (req, res) => {
+      res.json({ message: "Login not available in local development mode" });
+    });
+
+    app.get("/api/logout", (req, res) => {
+      req.logout(() => res.redirect("/"));
+    });
+
+    return;
+  }
+
   const config = await getOidcConfig();
 
   const verify: VerifyFunction = async (
@@ -98,6 +118,7 @@ export async function setupAuth(app: Express) {
     );
     passport.use(strategy);
   }
+
 
   passport.serializeUser((user: Express.User, cb) => cb(null, user));
   passport.deserializeUser((user: Express.User, cb) => cb(null, user));

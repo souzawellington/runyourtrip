@@ -7,9 +7,11 @@
  * Run with: npx tsx scripts/seed-real-products.ts
  */
 
+import 'dotenv/config';
 import { db } from '../server/db';
 import { templates, categories } from '../shared/schema';
 import { eq } from 'drizzle-orm';
+
 
 // Travel product categories
 const TRAVEL_CATEGORIES = [
@@ -263,9 +265,10 @@ async function seedRealProducts() {
                 rating: '0',
                 downloads: 0,
                 sales: 0,
-                code: null,
-                preview: null,
+                code: '<!-- Template code placeholder -->',
+                preview: 'https://placehold.co/800x600/28282D/FF7A2E?text=' + encodeURIComponent(product.name),
             });
+
 
             console.log(`✅ Created: ${product.name} - R$${product.price}`);
             created++;

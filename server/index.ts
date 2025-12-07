@@ -1,6 +1,8 @@
+import 'dotenv/config';
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+
 import { validateEnvironment, generateSessionSecret } from "./env-validation";
 import { seedEnglishContent } from "./seed-english-content";
 import { securityHeaders, corsOptions, requestSizeLimit, replitSecurityMiddleware } from "./utils/replit-security";
@@ -85,29 +87,29 @@ app.use((req, res, next) => {
 (async () => {
   // Validate environment variables on startup
   validateEnvironment();
-  
+
   // Configure database connection pool
   configureDatabasePool();
-  
+
   // Generate session secret if needed for development
   if (!process.env.SESSION_SECRET) {
     process.env.SESSION_SECRET = generateSessionSecret();
   }
-  
+
   logger.info('Starting RUN YOUR TRIP server', {
     environment: process.env.NODE_ENV,
     nodeVersion: process.version,
   });
-  
+
   const server = await registerRoutes(app);
-  
+
   // Seed English learning content for marketplace
   try {
     await seedEnglishContent();
   } catch (error) {
     console.log("English content already seeded or error occurred:", error);
   }
-  
+
   // Seed admin user for Replit environment
   if (process.env.REPLIT_DOMAINS) {
     const { seedAdminUser } = await import("./seed-admin");
@@ -119,14 +121,14 @@ app.use((req, res, next) => {
 
   // Add health monitoring routes
   app.use("/api/health", healthRoutes);
-  
+
   // Add monitoring routes
   const monitoringRoutes = (await import("./routes/monitoring")).default;
   app.use("/api/monitoring", monitoringRoutes);
 
   // Add error logging middleware
   app.use(errorLogger);
-  
+
   // Import and use error handler
   const { errorHandler } = await import("./middleware/error-handler");
   app.use(errorHandler);
