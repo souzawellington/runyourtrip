@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="60" viewBox="0 0 200 60">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF7A2E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF4D4D;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <circle cx="25" cy="30" r="20" fill="url(#logoGradient)"/>
+  <text x="20" y="38" fill="white" font-family="Arial, sans-serif" font-size="20" font-weight="bold">✈</text>
+  <text x="55" y="38" fill="#EFEFEF" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Run Your Trip</text>
+</svg>
